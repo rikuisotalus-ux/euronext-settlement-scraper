@@ -13,6 +13,22 @@ PRODUCTS = [
         "code": "NSBY-DAMS",
         "name": "NSBY"
     }
+    {
+        "code": "NSBQ-DAMS",
+        "name": "NSBQ"
+    }
+{
+        "code": "NSBM-DAMS",
+        "name": "NSBM"
+    }
+{
+        "code": "HLBQ-DAMS",
+        "name": "HLBQ"
+    }
+{
+        "code": "HLBM-DAMS",
+        "name": "HLBM"
+    }
 ]
 
 BASE_URL = "https://live.euronext.com/en/product/commodities-futures/{code}/settlement-prices"
