@@ -36,7 +36,7 @@ BASE_URL = "https://live.euronext.com/en/product/commodities-futures/{code}/sett
 
 def scrape_product(page, product):
     url = BASE_URL.format(code=product["code"])
-    output_file = f"{product['name']}_settlement.csv"
+    output_file = f"data/{product['name']}_settlement.csv"
 
     page.goto(url, timeout=60000)
     page.wait_for_selector("table#DataTables_Table_0", timeout=60000)
