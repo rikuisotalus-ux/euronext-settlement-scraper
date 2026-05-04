@@ -1,17 +1,28 @@
 import csv
 from playwright.sync_api import sync_playwright
 
-URL = "https://live.euronext.com/en/product/commodities-futures/HLBY-DAMS/settlement-prices"
-OUTPUT = "HLBY_settlement.csv"
+# =============================
+# TUOTTEET
+# =============================
+PRODUCTS = [
+    {
+        "code": "HLBY-DAMS",
+        "name": "HLBY"
+    },
+    {
+        "code": "NSBY-DAMS",
+        "name": "NSBY"
+    }
+]
 
-with sync_playwright() as p:
-    browser = p.chromium.launch(
-        headless=True,
-        args=["--no-sandbox", "--disable-dev-shm-usage"]
-    )
-    page = browser.new_page()
+BASE_URL = "https://live.euronext.com/en/product/commodities-futures/{code}/settlement-prices"
 
-    page.goto(URL, timeout=60000)
+
+def scrape_product(page, product):
+    url = BASE_URL.format(code=product["code"])
+    output_file = f"{product['name']}_settlement.csv"
+
+    page.goto(url, timeout=60000)
     page.wait_for_selector("table#DataTables_Table_0", timeout=60000)
 
     headers = page.locator("table thead th").all_inner_texts()
@@ -23,11 +34,22 @@ with sync_playwright() as p:
         if len(cells) == len(headers):
             data.append(cells)
 
-    with open(OUTPUT, "w", newline="", encoding="utf-8") as f:
+    with open(output_file, "w", newline="", encoding="utf-8") as f:
         writer = csv.writer(f)
         writer.writerow(headers)
         writer.writerows(data)
 
-    browser.close()
+    print(f"✅ {product['code']} → {output_file}")
 
-print(f"✅ CSV valmis: {OUTPUT}")
+
+with sync_playwright() as p:
+    browser = p.chromium.launch(
+        headless=True,
+        args=["--no-sandbox", "--disable-dev-shm-usage"]
+    )
+    page = browser.new_page()
+
+    for product in PRODUCTS:
+        scrape_product(page, product)
+
+    browser.close()
