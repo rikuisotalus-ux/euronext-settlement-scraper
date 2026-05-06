@@ -87,7 +87,7 @@ def scrape_all():
                 delivery = cells[0].strip() if cells[0] else ""
 
                 # ❌ SKIPATAAN TOTAL-RIVIT
-                if delivery.lower() == "Total" or delivery == "":
+                if delivery == "":
                     continue
 
                 product_code = build_product_code(product_name, delivery)
