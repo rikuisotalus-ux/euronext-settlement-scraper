@@ -87,13 +87,13 @@ def scrape_all():
                 delivery = cells[0].strip() if cells[0] else ""
 
                 # ❌ SKIPATAAN TOTAL-RIVIT
-                
-if (
-    delivery == ""
-    or delivery.lower() == "total"
-    or "/" in delivery        # ❗ poistaa nämä häiriörivit
-):
-continue
+                if (
+                    delivery == ""
+                    or delivery.lower() == "total"
+                    or "/" in delivery        
+                    # ❗ poistaa nämä häiriörivit
+                ):
+                    continue
 
                 product_code = build_product_code(product_name, delivery)
 
