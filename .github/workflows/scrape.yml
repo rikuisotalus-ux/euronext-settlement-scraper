@@ -2,7 +2,7 @@ name: Euronext Settlement Scraper
 
 on:
   schedule:
-    - cron: "0 17 * * *"   # Ajetaan joka päivä klo 06:00 UTC
+    - cron: "0 17 * * *"   # Ajetaan joka päivä klo 17:00 UTC
   workflow_dispatch:     # Sallii manuaalisen ajon nappia painamalla
 
 permissions:
