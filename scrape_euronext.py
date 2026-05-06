@@ -53,7 +53,7 @@ def scrape_all():
     headers = None
 
     # 📅 päivän leima
-    today = (datetime.utcnow().strftime("%d.%m.%Y")
+    today = (datetime.utcnow().strftime("%Y-%m-%d")
     
 
 
