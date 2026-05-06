@@ -53,9 +53,10 @@ def scrape_all():
     headers = None
 
     # 📅 päivän leima
+    from datetime import datetime, timezone, timedelta
+    today = (datetime.utcnow() + timedelta(hours=3)).strftime("%d.%m.%Y")
     
-from datetime import datetime, timezone, timedelta
-today = (datetime.utcnow() + timedelta(hours=3)).strftime("%d.%m.%Y")
+
 
 
     with sync_playwright() as p:
